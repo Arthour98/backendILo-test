@@ -5,10 +5,6 @@ header("Access-Control-Allow-Headers: Content-Type");
 header("Content-Type: application/json");
 
 
-
-
-
-
 if (
     $_SERVER["REQUEST_METHOD"] === "POST"
 ) {
@@ -27,12 +23,12 @@ if (
             break;
         }
     }
-    unset($task);
+    unset($task); //// h logikh ths antikatastashs tou Done status auth h  for !
 
     $tasks = json_encode($tasks, JSON_PRETTY_PRINT);
 
     if (file_put_contents("tasks.json", $tasks)) {
-        echo json_encode(["status" => $status]);
+        echo json_encode(["status" => $status]); /////stelnw to status pisw sthn js gia na 3erw pws 8a xeiristw thn classList
         exit;
     } else {
         echo json_encode(["status" => "failed"]);

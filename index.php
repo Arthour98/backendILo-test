@@ -4,16 +4,17 @@ $json_file = file_get_contents("tasks.json");
 $tasks = json_decode($json_file, true); //legit data !!
 
 $tasks_arr = [];   ///////->kalou kakou tha xrhsimopoihsw allo array oxi to original,dikh mou prosegish !
-
-if ($tasks)   //////->kaluptw to senario opou to task einai akoma adeio !!!
+$pointer_id = 0;
+if (is_array($tasks))   //////->kaluptw to senario opou to task einai akoma adeio !!!
 {
     foreach ($tasks as $task) {
         $tasks_arr[] = $task;
     }
+    $pointer_id = $tasks_arr[count($tasks_arr) - 1]["id"];
 }
 
 
-$last_id = is_null($tasks_arr) ? 1 : $tasks_arr[count($tasks_arr) - 1]["id"];
+
 if (
     $_SERVER["REQUEST_METHOD"] === "POST"
     && isset($_POST["title"])
@@ -21,7 +22,7 @@ if (
 ) {
     $title = htmlspecialchars($_POST["title"]);
     $description = htmlspecialchars(($_POST["description"]));
-    $id = $last_id + 1;
+    $id = $pointer_id + 1;
     $done = false;
     $task_placeholder = array("id" => $id, "title" => $title, "description" => $description, "done" => $done);
 
@@ -29,8 +30,10 @@ if (
     {
         $task = array($tasks_placeholder);
 
-        if ($tasks) {
+        if (is_array($tasks)) {
             $task =  array(...$tasks, $task_placeholder);
+        } else {
+            $task = array($task_placeholder);
         }
         $converted_task = json_encode($task, JSON_PRETTY_PRINT);
         if (file_put_contents("tasks.json", $converted_task)) {
@@ -74,7 +77,7 @@ if (
         </div>
 
         <div class="task-col">
-            <?php if ($tasks_arr == null): ?>
+            <?php if (empty($tasks_arr)): ?>
                 <p>No Tasks,No Worries</p>
             <?php else:; ?>
                 <?php foreach ($tasks_arr as $task): ?>

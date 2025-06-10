@@ -29,7 +29,6 @@ background-color:lightblue;
 overflow-y:scroll;
 scrollbar-width:none;
 scroll-behavior: smooth;
-border:1px solid black;
 padding:20px;
 }
 
@@ -43,7 +42,6 @@ align-items:center;
 
 form#task-form
 {
-border:1px solid red;
 flex:0.5;
 width:60%;
 padding:2rem 1rem;
@@ -105,7 +103,7 @@ transition: background-color 0.5s linear;
 
 form.status-form
 {
-flex:1;
+flex:0.1;
 min-height:100%;
 position:relative;
 }
@@ -113,7 +111,9 @@ position:relative;
 .task-line
 {
 display:flex;
-border:1px solid black;
+border-bottom:1px solid black;
+height:fit-content;
+word-break:break-all;
 column-gap:20px;
 padding:0 10px;
 }
@@ -128,11 +128,12 @@ top:50%;
 
 p.title
 {
-flex:0.25;
+flex:0.5;
 font-size:1.5rem;
 }
 p.desc
 {
-  flex:0.5;
+  flex:0.4;
+  min-width:50%;
   font-size:1.5rem;
 }
