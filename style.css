@@ -4,3 +4,135 @@
   text-decoration: line-through;
   color: gray;
 }
+
+body
+{
+width:100%;
+height:100vh;
+margin:0;
+overflow-x:hidden;
+background-color:#05050e;
+color:white;
+}
+
+#task-container
+{
+display:flex;
+height:50%;
+padding:50px;
+}
+
+.form-col,.task-col
+{
+flex:1;
+background-color:lightblue;
+overflow-y:scroll;
+scrollbar-width:none;
+scroll-behavior: smooth;
+border:1px solid black;
+padding:20px;
+}
+
+.form-col
+{
+display:flex;
+flex-direction:column;
+align-items:center;
+
+}
+
+form#task-form
+{
+border:1px solid red;
+flex:0.5;
+width:60%;
+padding:2rem 1rem;
+}
+
+form#task-form>div 
+{
+margin-bottom:3rem 
+}
+
+.flex
+{
+  display:flex;
+  flex:1;
+  column-gap:20px;
+}
+
+.task-label
+{
+flex:0.3;
+flex-shrink:1;
+text-wrap:nowrap;
+}
+#task-input,#task-desc
+{
+flex:0.7;
+border:none;
+border-radius:10px;
+padding:10px 5px;
+flex-shrink:1;
+min-width: 0;
+}
+
+#task-desc
+{
+  resize: none;
+}
+.end-align
+{
+  justify-content:end;
+}
+
+#add-button
+{
+background-color:goldenrod;
+color:whitesmoke;
+font-size:1.2rem;
+padding:10px 20px;
+border-radius:12px;
+border:none;
+cursor:pointer;
+transition: background-color 0.5s linear;
+}
+#add-button:hover
+{
+background-color:rgb(83, 62, 9);
+transition: background-color 0.5s linear;
+}
+
+form.status-form
+{
+flex:1;
+min-height:100%;
+position:relative;
+}
+
+.task-line
+{
+display:flex;
+border:1px solid black;
+column-gap:20px;
+padding:0 10px;
+}
+
+input[type="checkbox"].check
+{
+margin:0;
+scale:1.5;
+position:absolute;
+top:50%;
+}
+
+p.title
+{
+flex:0.25;
+font-size:1.5rem;
+}
+p.desc
+{
+  flex:0.5;
+  font-size:1.5rem;
+}
