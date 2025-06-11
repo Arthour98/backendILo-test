@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 $json_file = file_get_contents("tasks.json");
 $tasks = json_decode($json_file, true); //legit data !!
 
@@ -13,12 +13,13 @@ if (is_array($tasks))   //////->kaluptw to senario opou to task einai akoma adei
     $pointer_id = $tasks_arr[count($tasks_arr) - 1]["id"];
 }
 
-
+$err_msg = "";
 
 if (
     $_SERVER["REQUEST_METHOD"] === "POST"
     && isset($_POST["title"])
     && isset($_POST["description"])
+
 ) {
     $title = htmlspecialchars($_POST["title"]);
     $description = htmlspecialchars(($_POST["description"]));
@@ -40,6 +41,10 @@ if (
             header("location:index.php");
             exit;
         }
+    } else {
+        $_SESSION["err_msg"] = "Length must be at least 3 chars long";
+        header("location:index.php");
+        exit;
     }
 }
 
@@ -70,8 +75,13 @@ if (
                     <textarea id="task-desc" name="description"
                         placeholder="description"></textarea>
                 </div>
+                <?php if (!empty($_SESSION["err_msg"])):; ?>
+                    <?php echo '<p class="error">' . $_SESSION["err_msg"] . '</p>'; ?>
+                    <?php unset($_SESSION["err_msg"]); ?>
+                <?php endif; ?>
+
                 <div class="flex end-align">
-                    <input type="submit" value="Add" id="add-button">
+                    <input type="submit" value="Add" id="add-button" name="task-submit">
                 </div>
             </form>
         </div>
